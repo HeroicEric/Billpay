@@ -1,0 +1,12 @@
+%h1 Members List
+
+%a(href="/members/new") Add a New Member
+
+- unless @members.empty?
+	%ul#members
+	- @members.each do |member|
+		%li
+			%a(href="/members/#{member.id}")
+				#{member.username} (#{member.name})
+- else
+	%p There aren't any members yet!

@@ -1,0 +1,14 @@
+%h1 Debt Test!
+%p #{@owes.name} owes $#{@debt.amount} to #{@owed.name}.
+
+%form(action="/debt/new" method="post")
+	%label(for="owed_id") Owed ID:
+	%input(type="text" name="debt[owed_id]" value="#{@debt.owed_id}")
+	
+	%label(for="owes_id") Owes ID:
+	%input(type="text" name="debt[owes_id]" value="#{@debt.owes_id}")
+	
+	%label(for="amount") Amount:
+	%input(type="text" name="debt[amount]" value="#{@debt.amount}")
+	
+	%input#submit(type="submit" value="Submit") or <a href="/members">cancel</a>

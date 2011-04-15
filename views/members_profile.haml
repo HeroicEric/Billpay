@@ -1,20 +1,20 @@
 %a(href="/members") Back to Members
 
-%h1= @member.username
-%ul
-	%li= @member.name
-	%li= @member.age
-	%li= @member.email
-	%li
-		%a(href="/members/edit/#{@member.id}") Edit Info
+%h1= @member.name
+%a(href="/members/edit/#{@member.id}") Edit Info
 
 %h3 Friends List:
 - unless @member.friends.empty?
-	%ul
-	- @member.friends.each do |friend|
-		%li #{friend.name}
-	- @member.friendships.each do |f|
-		%li #{f.target_id}
+  %ul
+  - @member.friends.each do |friend|
+    %li
+      %a(href="#{friend.url}")= friend.name
+    - unless @member.debts(:with_id => friend.id).empty?
+      %ul
+        - @member.debts(:with_id => friend.id).each do |debt|
+          %li= debt.amount
+        %li Balance: #{@member.balance_with(friend.id)}
+
 - else
-	%p You ain't got nobodyyyyy.
-	%a(href="/friendship/new") Make a Friendship
+  %p You ain't got nobodyyyyy.
+  %a(href="/friendship/new") Make a Friendship

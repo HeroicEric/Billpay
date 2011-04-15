@@ -78,52 +78,10 @@ get '/friendship/new' do
 	haml :friendship_new
 end
 
-# Create a Friendship
-post '/friendship/new' do
-	@friendship1 = Friendship.new
-	@friendship1.starter_id = params[:starter_id]
-	@friendship1.target_id = params[:target_id]
-
-	@friendship2 = Friendship.new
-	@friendship2.starter_id = params[:target_id]
-	@friendship2.target_id = params[:starter_id]
-	
-	# Check if params are valid
-	if @friendship1.save and @friendship2.save
-		status 201 # Created successfully
-		redirect '/members'
-	else
-		status 400 # Bad Request
-		redirect '/members'
-	end
-
-end
 
 #########################################
 ## Bills ################################
 #########################################
-
-get '/bill' do
-	@bill = Bill.new(:amount => 30, :title => "Sushi at Sakura", :description => "You owe me money for the other night when we ate sushi at Sakura.", :involved_members_ids => "1, 2")
-	
-	# Create an array to hold actual member objects
-	@involved_members = Array.new
-	
-	# Add members to the array by using their ids
-	@involved_members_ids = @bill.involved_members_ids.split(',')
-	
-	@involved_members_ids.each do |id|
-
-		@bill.members.push(Member.get(id.to_i))
-	end
-	
-	haml :bill
-end
-
-get '/bill/new' do
-	@bill = Bill.new
-
-end
 
 # Finalize and Initialize the Database
 DataMapper.finalize

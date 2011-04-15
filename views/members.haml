@@ -6,7 +6,6 @@
 	%ul#members
 	- @members.each do |member|
 		%li
-			%a(href="/members/#{member.id}")
-				#{member.username} (#{member.name})
+			%a(href="/members/#{member.id}") #{member.name}
 - else
 	%p There aren't any members yet!

@@ -8,7 +8,4 @@ class Bill
 	property :involved_members_ids, String
 	property :created_at,           DateTime
 	property :updated_at,           DateTime
-	
-	has n, :members
-	has n, :debts
 end

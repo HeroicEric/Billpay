@@ -34,7 +34,7 @@ post '/members/new' do
 	@member = Member.create(params[:member])
 	if @member.save
 		status 201
-		redirect '/members'
+		redirect '/members/' + @member.id.to_s
 	else
 		status 400
 		haml :members_new
@@ -68,16 +68,13 @@ put '/members/edit/:id' do
 	end
 end
 
-#########################################
-## Friendship ###########################
-#########################################
+post '/members/friends' do
+  member = Member.get(params[:source_id])
+  member.add_friend(params[:target_id])
+  member.save
 
-# Add a Friendship
-get '/friendship/new' do
-	@friendship = Friendship.new
-	haml :friendship_new
+  redirect '/members/' + params[:source_id]
 end
-
 
 #########################################
 ## Bills ################################

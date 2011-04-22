@@ -1,0 +1,4 @@
+%form(action="/members/friends" methods="POST")
+  %input(type="hidden" name="source_id" value="#{@member.id}")
+  %input(type="text" name="target_id" placeholder="Enter ID Here")
+  %input(type="submit" value="Add Friend")

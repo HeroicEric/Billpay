@@ -15,6 +15,11 @@ class Member
     "/members/#{id}"
   end
 
+  def add_friend(target_id)
+    self.friendships << Friendship.create(:target_id => target_id)
+    self.save
+  end
+
   def balance_with(target_id)
     balance = 0
 

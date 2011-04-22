@@ -17,4 +17,9 @@
 
 - else
   %p You ain't got nobodyyyyy.
-  %a(href="/friendship/new") Make a Friendship
+  
+%h2 Add a New Friend
+%form(action="/members/friends" method="POST")
+  %input(type="hidden" name="source_id" value="#{@member.id}")
+  %input(type="text" name="target_id" placeholder="Enter ID Here")
+  %input(type="submit" value="Add Friend")

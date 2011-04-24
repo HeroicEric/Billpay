@@ -1,0 +1,27 @@
+%a(href="/users") Back to users
+
+%h1 #{@user.name} (#{@user.username})
+%p= @user.image
+%p #{@user.email}
+%a(href="/users/edit/#{@user.id}") Edit Info
+
+%h3 Friends List:
+- unless @user.friends.empty?
+  %ul
+  - @user.friends.each do |friend|
+    %li
+      %a(href="#{friend.url}")= friend.name
+    - unless @user.debts(:with_id => friend.id).empty?
+      %ul
+        - @user.debts(:with_id => friend.id).each do |debt|
+          %li= debt.amount
+        %li Balance: #{@user.balance_with(friend.id)}
+
+- else
+  %p You ain't got nobodyyyyy.
+  
+%h2 Add a New Friend
+%form(action="/user/friend" method="POST")
+  %input(type="hidden" name="source_id" value="#{@user.id}")
+  %input(type="text" name="target_id" placeholder="Enter ID Here")
+  %input(type="submit" value="Add Friend")

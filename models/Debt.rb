@@ -5,5 +5,5 @@ class Debt
 	property :amount,   Integer
   property :with_id,  Integer
 
-  belongs_to :member
+  belongs_to :user
 end
